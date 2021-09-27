@@ -16,28 +16,28 @@ class CatsController < ApplicationController
         else
             warning = false
         end
-        if bsc > 5
+        if bcs > 5
             suggestedIdealWeight = (cw - (cw * ratioOverweight)).round(3)
         end
-        rer = ((BCS)/2.2)**0.75
+        rer = ((bcs)/2.2)**0.75
         rer = (rer * 70).to_i
-        if bsc < 6
+        if bcs < 6
             if isNuetered = true
                 suggestedCalories = rer * 1.0
             elsif isNuetered = false
                     suggestedCalories = rer * 1.2
             end
-        elsif bsc >= 6
+        elsif bcs >= 6
             suggestedCalories = rer * 0.8
         end
 
-        if bsc.between?(6,8)
+        if bcs.between?(6,8)
             message = "Your cat is #{percentOverweight}% overweight!\nSuggested ideal weight is #{suggestedIdealWeight} pounds"
-        elsif bsc >= 8
+        elsif bcs >= 8
             message = "Your cat is obese!\nYour cat is #{percentOverweight}% over ideal weight.\nSuggested ideal weight is #{suggestedIdealWeight} pounds"
-        elsif bsc.between?(4,5)
+        elsif bcs.between?(4,5)
             message = "Your cat is a perfect weight!"
-        elsif bsc < 4
+        elsif bcs < 4
             message = "Your cat is underweight."
         else
             message = "Error."
@@ -45,9 +45,9 @@ class CatsController < ApplicationController
 
         bodyFat = params[:currentWeight] * (100)
 
-        messageSuggestion = "no"
+        messageCalories = "Suggested intake of #{suggestedCalories} Calories per day."
 
-        render json: [percentOverWeight: percentOverweight, warning: warning, suggestedCalories: suggestedCalories, message: message], status: :accepted
+        render json: [percentOverWeight: percentOverweight, warning: warning, suggestedCalories: suggestedCalories, message: message, messageCalories: messageCalories], status: :accepted
     end
 
 end
