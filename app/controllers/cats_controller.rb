@@ -19,14 +19,21 @@ class CatsController < ApplicationController
         if bsc > 5
             suggestedIdealWeight = (cw - (cw * ratioOverweight)).round(3)
         end
+        rer = ((BCS)/2.2)**0.75
+        rer = (rer * 70).to_i
         if bsc < 6
-            suggestedCalories = ((BCS)/2.2)**0.75
-            suggestedCalories = (suggestedCalories * 70).to_i
+            if isNuetered = true
+                suggestedCalories = rer * 1.0
+            elsif isNuetered = false
+                    suggestedCalories = rer * 1.2
+            end
+        elsif bsc >= 6
+            suggestedCalories = rer * 0.8
         end
 
         if bsc.between?(6,8)
             message = "Your cat is #{percentOverweight}% overweight!\nSuggested ideal weight is #{suggestedIdealWeight} pounds"
-        elsif bsc > 8
+        elsif bsc >= 8
             message = "Your cat is obese!\nYour cat is #{percentOverweight}% over ideal weight.\nSuggested ideal weight is #{suggestedIdealWeight} pounds"
         elsif bsc.between?(4,5)
             message = "Your cat is a perfect weight!"
