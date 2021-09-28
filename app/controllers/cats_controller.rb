@@ -5,9 +5,15 @@ class CatsController < ApplicationController
         render json: cats, status: :ok
     end
 
+    def create
+        cat = @current_user.cats.create!(cat_params)
+        render json: cat, status: :created
+    end
+
     def bcscalculator
         bcs = params[:BCS].to_f
         cw = params[:currentWeight].to_f 
+        isNuetered = params[:isNuetered]
 
         ratioOverweight = (0.1*bcs - 0.5)
         percentOverweight = (ratioOverweight*100).to_i;
@@ -22,10 +28,10 @@ class CatsController < ApplicationController
         rer = ((bcs)/2.2)**0.75
         rer = (rer * 70).to_i
         if bcs < 6
-            if isNuetered = true
+            if isNuetered = "true"
                 suggestedCalories = rer * 1.0
-            elsif isNuetered = false
-                    suggestedCalories = rer * 1.2
+            elsif isNuetered = "false"
+                suggestedCalories = rer * 1.2
             end
         elsif bcs >= 6
             suggestedCalories = rer * 0.8
@@ -45,9 +51,14 @@ class CatsController < ApplicationController
 
         bodyFat = params[:currentWeight] * (100)
 
-        messageCalories = "Suggested intake of #{suggestedCalories} Calories per day."
+        messageCalories = "Suggested intake is #{suggestedCalories} Calories per day."
 
         render json: [percentOverWeight: percentOverweight, warning: warning, suggestedCalories: suggestedCalories, message: message, messageCalories: messageCalories], status: :accepted
     end
 
+    private
+
+    def cat_params
+        params.permit(:name, :age, :id)
+    end
 end

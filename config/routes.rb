@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
   resources :weights
-  resources :cats
+  resources :cats, only: [:create, :show, :index, :update, :delete]
   resources :users
 
   # custom route to manage new user
