@@ -15,6 +15,12 @@ class CatsController < ApplicationController
         render json: cat, status: :created
     end
 
+    def destroy
+        cat = Cat.find(params[:id])
+        cat.destroy
+        head :no_content
+    end
+
     def bcscalculator
         bcs = params[:BCS].to_f
         cw = params[:currentWeight].to_f 
