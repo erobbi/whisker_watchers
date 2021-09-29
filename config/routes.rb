@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   resources :weights, only: [:create]
   resources :cats, only: [:create, :show, :index, :update, :destroy]
-  resources :users
+  resources :users, only: [:show, :update]
 
   # custom route to manage new user
   post '/signup', to: 'users#create'
