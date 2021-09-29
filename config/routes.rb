@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  resources :weights
+  resources :weights, only: [:create]
   resources :cats, only: [:create, :show, :index, :update, :delete]
   resources :users
 
