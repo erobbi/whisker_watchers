@@ -5,6 +5,11 @@ class CatsController < ApplicationController
         render json: cats, status: :ok
     end
 
+    def show
+        cat = Cat.find_by(id: params[:id])
+        render json: cat, status: :ok
+    end
+
     def create
         cat = @current_user.cats.create!(cat_params)
         render json: cat, status: :created
