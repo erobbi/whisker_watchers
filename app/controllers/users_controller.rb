@@ -10,6 +10,12 @@ class UsersController < ApplicationController
         render json: @current_user
     end
 
+    # patch has to be sent to an instance (user/{user_id), but this will always default the patch to that of current_user
+    def update
+        @current_user.update!(user_params)
+        render json: @current_user, status: :accepted
+    end
+
     def create
         user = User.create!(user_params)
         session[:user_id] = user.id
