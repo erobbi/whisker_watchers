@@ -18,6 +18,7 @@ ActiveRecord::Schema.define(version: 2021_09_22_231030) do
   create_table "cats", force: :cascade do |t|
     t.string "name"
     t.integer "age"
+    t.string "cat_url"
     t.integer "food_per_day"
     t.bigint "user_id", null: false
     t.datetime "created_at", precision: 6, null: false
