@@ -1,7 +1,7 @@
 class CatsController < ApplicationController
 
     def index
-        cats = Cat.all
+        cats = Cat.where(user_id: session[:user_id])
         render json: cats, status: :ok
     end
 
