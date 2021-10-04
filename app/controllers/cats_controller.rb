@@ -1,4 +1,5 @@
 class CatsController < ApplicationController
+    skip_before_action :authorize, only: :bcscalculator
 
     def index
         cats = Cat.where(user_id: session[:user_id])
@@ -47,6 +48,8 @@ class CatsController < ApplicationController
         elsif bcs >= 6
             suggestedCalories = rer * 0.8
         end
+
+        suggestedCalories = suggestedCalories.round()
 
         if bcs.between?(6,8)
             message = "Your cat is #{percentOverweight}% overweight!\nSuggested ideal weight is #{suggestedIdealWeight} pounds"
