@@ -5,6 +5,8 @@ class CreateCats < ActiveRecord::Migration[6.1]
       t.integer :age
       t.string :cat_url
       t.integer :caloriesPerDay
+      t.integer :bcs
+      t.boolean :isNuetered
       t.references :user, null: false, foreign_key: true
 
       t.timestamps
