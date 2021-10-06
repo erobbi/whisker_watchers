@@ -35,7 +35,7 @@ class CatsController < ApplicationController
             warning = false
         end
         if bcs > 5
-            suggestedIdealWeight = (cw - (cw * ratioOverweight)).round(3)
+            suggestedIdealWeight = (cw - (cw * ratioOverweight)).round(1)
         end
         rer = ((bcs)/2.2)**0.75
         rer = (rer * 70).to_i
@@ -70,9 +70,13 @@ class CatsController < ApplicationController
         render json: [percentOverWeight: percentOverweight, warning: warning, suggestedCalories: suggestedCalories, message: message, messageCalories: messageCalories], status: :accepted
     end
 
+    def chartdata
+        byebug
+    end
+
     private
 
     def cat_params
-        params.permit(:name, :age, :cat_url, :food_per_day, :bcs, :id)
+        params.permit(:name, :age, :cat_url, :caloriesPerDay, :bcs, :id)
     end
 end

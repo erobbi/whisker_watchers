@@ -12,4 +12,7 @@ Rails.application.routes.draw do
   # calculator routes
   post '/catcalculator', to: 'cats#bcscalculator'
 
+  # chart data
+  post '/chartdata',  to: 'cats#chartdata'
+
 end
