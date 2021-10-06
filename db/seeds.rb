@@ -10,6 +10,11 @@ oliver = Cat.create(name: "Oliver", age: 6, cat_url: "https://i.ibb.co/2FShhW6/C
 
 
 Weight.create(weight: 13, cat_id: max.id)
+Weight.create(weight: 13.2, cat_id: max.id)
+Weight.create(weight: 14.2, cat_id: max.id)
+Weight.create(weight: 13.4, cat_id: max.id)
+
+
 Weight.create(weight: 12, cat_id: luna.id)
 Weight.create(weight: 11, cat_id: oliver.id)
 
