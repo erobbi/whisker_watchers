@@ -2,7 +2,7 @@
     "name": "whisker-watchers",
     "description": "a weight loss program for your cat",
     "engines": {
-        "node": ">= 14"
+        "node": ">= 16.4.0"
       },
       "scripts": {
         "build": "npm install --prefix client && npm run build --prefix client",
