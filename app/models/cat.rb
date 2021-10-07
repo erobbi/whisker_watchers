@@ -7,24 +7,25 @@ class Cat < ApplicationRecord
       self.weights.last.weight.to_f.round(1)
     end
   end
-  
+
   def goalWeight
-    if self.weights.last
     bcs = self.bcs
-    cw =  self.currentWeight
-    ratioOverweight = (0.1*bcs - 0.5)
+    cw = self.currentWeight
+    ratioOverweight = (0.1 * bcs - 0.5)
     if bcs > 5
-        suggestedIdealWeight = (cw - (cw * ratioOverweight)).to_f.round(1)
+      suggestedIdealWeight = (cw - (cw * ratioOverweight)).to_f.round(1)
+    else
+      suggestedIdealWeight = cw
     end
-  end
     return suggestedIdealWeight
   end
 
   def suggestedCaloriesPerDay
-    bcs = self.bcs
-    rer = ((bcs)/2.2)**0.75
-    rer = (rer * 70).to_i
-    return rer
+    if self.bcs
+      bcs = self.bcs
+      rer = ((bcs) / 2.2) ** 0.75
+      rer = (rer * 70).to_i
+      return rer
+    end
   end
-  
 end
