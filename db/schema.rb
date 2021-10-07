@@ -22,6 +22,8 @@ ActiveRecord::Schema.define(version: 2021_09_22_231030) do
     t.integer "bcs"
     t.boolean "isNuetered"
     t.integer "caloriesPerDay"
+    t.integer "bcs"
+    t.boolean "isNuetered"
     t.bigint "user_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
@@ -38,7 +40,7 @@ ActiveRecord::Schema.define(version: 2021_09_22_231030) do
   end
 
   create_table "weights", force: :cascade do |t|
-    t.decimal "weight", precision: 3, scale: 1
+    t.integer "weight"
     t.bigint "cat_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false

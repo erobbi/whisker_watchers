@@ -15,4 +15,6 @@ Rails.application.routes.draw do
   # chart data
   post '/chartdata',  to: 'cats#chartdata'
 
+  # fallbcak route, for deploying
+  get "*path", to: "fallback#index", constraints: ->(req) { !req.xhr? && req.format.html? }
 end
