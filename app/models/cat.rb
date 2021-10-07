@@ -3,16 +3,20 @@ class Cat < ApplicationRecord
   has_many :weights, dependent: :destroy
 
   def currentWeight
-    self.weights.last.weight.to_f.round(1)
+    if self.weights.last
+      self.weights.last.weight.to_f.round(1)
+    end
   end
   
   def goalWeight
+    if self.weights.last
     bcs = self.bcs
     cw =  self.currentWeight
     ratioOverweight = (0.1*bcs - 0.5)
     if bcs > 5
         suggestedIdealWeight = (cw - (cw * ratioOverweight)).to_f.round(1)
     end
+  end
     return suggestedIdealWeight
   end
 
